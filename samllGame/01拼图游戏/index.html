@@ -1,0 +1,239 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title> 嗯哼 小拼图</title>
+		<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+		<style>
+			* {
+				box-sizing: border-box;
+			}
+			
+			main {
+				width: 300px;
+				height: 300px;
+				margin: 100px auto 50px auto;
+				border: solid 1px palegoldenrod;
+				position: relative;
+			}
+			
+			section {
+				width: calc(100% / 3);
+				height: calc(100% / 3);
+				float: left;
+				/*border: solid 1px peru;*/
+			}
+			
+			button {
+				display: block;
+				padding: 10px 30px;
+				background-color: #71A53E;
+				border: none;
+				border-radius: 5px;
+				color: white;
+				font-size: 25px;
+				font-weight: 900;
+				margin: 0 auto;
+				width: 116px;
+				margin: 0 auto;
+			}
+			
+			.pos1,
+			.pos2,
+			.pos3 {
+				top: 0;
+			}
+			
+			.pos4,
+			.pos5,
+			.pos6 {
+				top: 100px;
+			}
+			
+			.pos7,
+			.pos8,
+			.pos9 {
+				top: 200px;
+			}
+			
+			.pos1,
+			.pos4,
+			.pos7 {
+				left: 0;
+			}
+			
+			.pos2,
+			.pos5,
+			.pos8 {
+				left: 100px;
+			}
+			
+			.pos3,
+			.pos6,
+			.pos9 {
+				left: 200px;
+			}
+			
+			section {
+				background-image: url(3.jpg);
+				position: absolute;
+				transition: all 0.5s;
+			}
+			
+			section:nth-of-type(1) {
+				background-position: 0 0;
+			}
+			
+			section:nth-of-type(2) {
+				background-position: -100px 0;
+			}
+			
+			section:nth-of-type(3) {
+				background-position: -200px 0;
+			}
+			
+			section:nth-of-type(4) {
+				background-position: 0 -100px;
+			}
+			
+			section:nth-of-type(5) {
+				background-position: -100px -100px;
+			}
+			
+			section:nth-of-type(6) {
+				background-position: -200px -100px;
+			}
+			
+			section:nth-of-type(7) {
+				background-position: 0 -200px;
+			}
+			
+			section:nth-of-type(8) {
+				background-position: -100px -200px;
+			}
+			
+			section:nth-of-type(9) {
+				background-position: -200px -200px;
+			}
+			
+			.border {
+				border: solid 1px white;
+			}
+			
+			#go,
+			#user {
+				cursor: pointer !important;
+			}
+		</style>
+	</head>
+
+	<body>
+		<nav class="navbar navbar-inverse navbar-fixed-top ">
+			<div class="container">
+				<div class="navbar-header">
+
+					<a class="navbar-brand" href="#" style="color: white !important;">
+						<span id="go" class="glyphicon glyphicon-chevron-left"></span>
+					</a>
+					<span class="text-center navbar-brand " style="color: white;">嗯哼 拼图小游戏</span>
+					<span href="" id="user" class="navbar-brand glyphicon glyphicon-user pull-right" style="position: absolute;right: 25px;"></span>
+				</div>
+
+				<!--/.nav-collapse -->
+			</div>
+		</nav>
+		<main>
+			<section draggable="true" class="pos1"></section>
+			<section draggable="true" class="pos2"></section>
+			<section draggable="true" class="pos3"></section>
+			<section draggable="true" class="pos4"></section>
+			<section draggable="true" class="pos5"></section>
+			<section draggable="true" class="pos6"></section>
+			<section draggable="true" class="pos7"></section>
+			<section draggable="true" class="pos8"></section>
+			<section draggable="true" class="pos9"></section>
+			<img id="bigPic" src="../拼图游戏/3.jpg" />
+		</main>
+
+		<div> <button> 开始</button></div>
+		<script type="text/javascript">
+			var b = 1;
+			var bigImg = document.getElementById('bigPic');
+			var btn = document.querySelector('button');
+			var arr = [false, false, false, false, false, false, false, false, false]
+			var arr1 = ['pos1', 'pos2', 'pos3', 'pos4', 'pos5', 'pos6', 'pos7', 'pos8', 'pos9']
+			var kk = null;
+			var is = true;
+
+			btn.addEventListener('click', function() {
+
+				sections = document.querySelectorAll('section');
+				bigImg.style.display = 'none';
+
+				for(var i = 0; i < sections.length; i++) {
+
+					do {
+						random = Math.floor(Math.random() * 9 + 1);
+						sections[i].className = "pos" + random;
+					}
+					while (arr[random - 1]);
+					arr[random - 1] = true;
+				}
+
+				arr = [false, false, false, false, false, false, false, false, false]
+
+				for(var i = 0; i < sections.length; i++) {
+
+					sections[i].ondragstart = function(e) {
+						className = e.target.className;
+						e.dataTransfer.setData('class', className)
+					}
+					sections[i].ondrop = function(e) {
+						clas = e.dataTransfer.getData('class');
+						ss = document.getElementsByClassName(clas)[0];
+						ss.className = this.className;
+						this.className = clas;
+						pp()
+
+					}
+					sections[i].ondragover = function(e) {
+						e.preventDefault();
+					}
+
+				}
+
+			})
+
+			function pp() {
+				secs = document.querySelectorAll('section');
+
+				arr3 = [];
+				for(var i = 0; i < secs.length; i++) {
+					kk = secs[i].className == arr1[i] ? true : false;
+					arr3.push(kk)
+
+				};
+				ss = arr3.every(function(item, index) {
+
+					return item == true
+				})
+
+				if(ss) {
+					alert('恭喜你答对了，管管送你一朵小红花')
+				}
+			}
+
+			var go = document.getElementById('go')
+			var user = document.getElementById('user')
+			go.onclick = function() {
+				window.location.href = "../../index.html"
+			}
+
+			user.onclick = function() {
+				window.location.href = '../../user/index.html'
+			}
+		</script>
+	</body>
+
+</html>

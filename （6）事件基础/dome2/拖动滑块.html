@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>拖动滑动</title>
+		<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+		<style type="text/css">
+			html {
+				width: 100%;
+				height: 100%;
+			}
+			
+			body {
+				height: 100%;
+				margin: 0;
+			}
+			#go,
+			#user {
+				cursor: pointer !important;
+			}
+			.main {
+				width: 1200px;
+				height: 600px;
+				position: relative;
+				margin: 20px auto;
+				background-color: #202020;
+			}
+			
+			.removal {
+				width: 160px;
+				height: 160px;
+				background: yellowgreen;
+				opacity: 0.6;
+				cursor: move;
+				position: absolute;
+			}
+		</style>
+	</head>
+
+	<body>
+		<nav class="navbar navbar-inverse navbar-fixed-top ">
+			<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"> &nbsp;
+			<div class="container">
+				<div class="navbar-header">
+
+					<div class="navbar-brand" href="#" style="color: white !important;"> <span id="go" href="" class="glyphicon glyphicon-chevron-left"> &#x3000</span>（6）滑块拖动</div>
+					<span href="" id="user" class="navbar-brand glyphicon glyphicon-user pull-right" style="position: absolute;right: 25px;"></span>
+				</div>
+
+				<!--/.nav-collapse -->
+			</div>
+		</nav>
+		<br /><br /><br />
+		<div class="main">
+
+			<div class="removal">
+
+			</div>
+		</div>
+
+		<script type="text/javascript">
+			var main = document.querySelector('.main');
+			var removal = document.querySelector('.removal');
+			removal.oncontextmenu = function() {
+				return false;
+			}
+
+			window.onmousedown = function(e) {
+
+				main.onmousemove = function(event) {
+					/*console.log("可视区域x坐标——"+event.clientX)
+					console.log('页面区域x坐标——'+event.pageX)*/
+					var x = event.pageX;
+					var y = event.pageY;
+					var left = x - main.offsetLeft - removal.offsetWidth / 2;
+					var top = y - main.offsetTop - removal.offsetHeight / 2;
+					console.log('left ——是' + left)
+					console.log('top——是' + top)
+
+					if(left < 0) {
+						left = 0;
+					} else if(left > main.offsetWidth - removal.offsetWidth) {
+						left = main.offsetWidth - removal.offsetWidth
+					}
+					if(top < 0) {
+						top = 0;
+					} else if(top > main.offsetHeight - removal.offsetHeight) {
+						top = main.offsetHeight - removal.offsetHeight;
+					}
+					removal.style.left = left + 'px';
+					removal.style.top = top + 'px';
+				}
+			}
+			window.onmouseup = function() {
+				main.onmousemove = null;
+			}
+
+			var go = document.getElementById('go')
+			var user = document.getElementById('user')
+			go.onclick = function() {
+				window.history.go(-1)
+			}
+
+			user.onclick = function() {
+				window.location.href = '../../user/index.html'
+			}
+		</script>
+	</body>
+	<!-- by GuanGuan 2016/10/05-->
+
+</html>

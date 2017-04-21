@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			p{
+				display: none;
+			}
+		</style>
+		<script>
+			window.onload=function(){
+				function Tab(obj){
+					this.btns=obj.querySelectorAll('input');
+					this.ps=obj.querySelectorAll("p");
+					this.length=this.btns.length;
+					this.index=0;
+					
+					var This=this;
+					for(var i=0;i<this.length;i++){
+						this.btns[i].index=i;
+						this.btns[i].onclick=function(){
+							This.index=this.index;
+							This.play();
+						};
+					}
+				}
+				
+				Tab.prototype.play=function(){
+					for(var i=0;i<this.length;i++){
+						this.btns[i].style.background='';
+						this.ps[i].style.display='none';
+					}
+					
+					this.btns[this.index].style.background='yellow';
+					this.ps[this.index].style.display='block';
+				}
+				
+				Tab.prototype.autoPlay=function(){
+					var This=this;
+					this.timer=setInterval(function(){
+						This.index++;
+						
+						if(This.index==This.length){
+							This.index=0;
+						}
+						
+						This.play();
+					},1000);
+				}
+				
+				Tab.prototype.stop=function(){
+					clearInterval(this.timer);
+				};
+				
+				
+				var div1=document.getElementById("div1");
+				var tab1=new Tab(div1);
+				
+				var div2=document.getElementById("div2");
+				var tab2=new Tab(div2);
+				tab2.autoPlay();
+				
+				var stop=document.getElementById("stop");
+				stop.onclick=function(){
+					tab2.stop();
+				};
+			};
+			  
+		</script>
+	</head>
+	<body>
+		<div id="div1">
+			<input type="button" value="按钮一" style="background: yellow;" />
+			<input type="button" value="按钮二" />
+			<input type="button" value="按钮三" />
+			<p style="display: block;">内容一</p>
+			<p>内容二</p>
+			<p>内容三</p>
+		</div>
+		
+		<div id="div2">
+			<input type="button" value="按钮一" style="background: yellow;" />
+			<input type="button" value="按钮二" />
+			<input type="button" value="按钮三" />
+			<p style="display: block;">内容一</p>
+			<p>内容二</p>
+			<p>内容三</p>
+		</div>
+		<input type="button" id="stop" value="停止动画" />
+	</body>
+</html>

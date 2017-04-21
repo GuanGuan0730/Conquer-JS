@@ -1,0 +1,52 @@
+	<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<script type="text/javascript">
+			
+			var arr = ["a", "b", "c", "d", "a", "b", "c", "d", "a", "b", "c", "d", "a"];
+			toMax(arr);
+
+			function toMax(arr) {
+				var json = {};
+				
+				var sMax = arr[0];
+				
+				for(var i = 0; i < arr.length; i++) {
+					
+					 
+					// 第一次循环  执行到第一个if时
+					// 此时 json = { } 里面为空， arr[0] == 'aa'
+					// json[arr[i]] == undefinet 
+					// 所以第一次不会执行 只有当 arr[i]中有重复的元素 储存到json对象时才会执行 
+					
+					if(json[arr[i]]) {
+						 
+						 console.log(json[arr[i]])
+						json[arr[i]]++;
+						 
+					// 把数组项添加到 json对象中，并赋值，记录每次出现次数，
+					} else {
+						json[arr[i]] = 1;
+					}
+					// 记录最大值 
+					if(json[arr[i]] > json[sMax]) {
+						sMax = arr[i];
+						console.log(0)
+					}
+				}
+				console.log(json)
+			alert("出现最多的是:" + sMax + ",出现次数:" + json[sMax]);
+			
+			}
+		</script>
+	</body>
+
+</html>
+
+

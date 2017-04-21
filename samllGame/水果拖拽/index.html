@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#left {
+				border: solid 2px palevioletred;
+				width: 500px;
+				height: 700px;
+				float: left;
+			}
+			
+			#right {
+				width: 422px;
+				height: 620px;
+				padding: 70px 20px 20px 20px;
+				border: solid 1px black;
+				margin-left: 800px;
+				background-image: url(images/看图识字.png);
+			}
+			
+			#right>p {
+				box-sizing: border-box;
+				margin: 0;
+				margin: 8px 3px 0 3px;
+				border: solid 1px blue;
+				float: left;
+				width: calc((100% - 24px) /4);
+				height: 150px;
+				padding-top: 70px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="left">
+			<img src="" alt="" />
+			<img src="" alt="" />
+			<img src="" alt="" />
+			<img src="" alt="" />
+			<img src="" alt="" />
+			<img src="" alt="" />
+			<img src="" alt="" />
+			<img src="" alt="" />
+			<img src="" alt="" />
+			<img src="" alt="" />
+			<img src="" alt="" />
+			<img src="" alt="" />
+			<img src="" alt="" />
+			<img src="" alt="" />
+			<img src="" alt="" />
+			<img src="" alt="" />
+		</div>
+		<section id="right">
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+			<script type="text/javascript">
+				var imgs = document.querySelectorAll('img');
+				var imgArr = [];
+				var imgindex = [];
+				var pss = document.querySelectorAll('section p');
+				var img　;
+				
+						
+				//			通过随机数(索引)取出数组中对应的项,
+				//			添加到新数组中,把取出的每项从原数组中删除（防止重复取值）；
+				//			删除后 数组中的长度发生变换， 即使随机数(索引)重复 每次取出的值是不同的;
+				//			每次刷新 新数组内容都不会产生重复 
+				//				
+				for(i = 1; i <= imgs.length; i++) {
+					imgArr.push(i)
+				}
+
+				for(var i = 0; i < imgs.length; i++) {
+					// 控制随机数的范围（ ）
+					var random = parseInt(Math.random() * imgArr.length);
+					imgindex.push(imgArr[random]);
+					imgArr.splice(random, 1);
+
+				}
+
+				for(var i = 0; i < imgs.length; i++) {
+					imgs[i].src = 'images/' + (imgindex[i]) + '.png';
+
+					(function(x) {	
+						imgs[x].ondragstart = function(e) {
+							e.dataTransfer.setData('text', imgindex[x]);
+							e.dataTransfer.effectAllowed = 'move';
+							img = imgs[x];
+						}
+					})(i);
+
+					(function(x) {
+						pss[x].ondragover = function(e) {
+							e.target.style.boxShadow = '0 0 20px red';
+						};
+						pss[x].ondragleave = function(e) {
+							console.log(e)
+							e.target.style.boxShadow = '0 0 2px transparent'
+						};
+						pss[x].ondrop = function(e) {
+							
+							
+							var aa = e.dataTransfer.getData('text');
+						
+							if(aa == x + 1){
+								e.target.appendChild(img);
+								e.target.style.borderStyle = 'solid 10px red';
+							}	
+
+						};
+
+					})(i);	
+				};
+				document.documentElement.addEventListener('drop', function(e) {
+					e.stopPropagation();
+					e.preventDefault();
+					})
+			</script>
+		</section>
+	</body>
+
+</html>

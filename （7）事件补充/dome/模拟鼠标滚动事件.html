@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>模拟鼠标滚动事件</title>
+		<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+		<style type="text/css">
+			html {
+				width: : 100%;
+				height: 100%;
+			}
+			
+			body {
+				box-sizing: border-box;
+				width: 100%;
+				margin: 0;
+				height: 100%;
+				padding-top: 30px;
+				background-color: darkgray;
+			}
+			
+			#main {
+				width: 300px;
+				margin: 0 auto;
+				display: flex;
+				height: 500px;
+				/*background-color: rosybrown;*/
+			}
+			
+			#text-body {
+				width: calc(100% - 30px);
+				overflow-y: hidden;
+				background-color: aquamarine;
+			}
+			
+			#scroll-body {
+				cursor: pointer;
+				position: relative;
+				width: 20px;
+			}
+			
+			#text-body .text-content {
+				padding: 15px;
+				position: relative;
+				background-color: #E0E0E0;
+			}
+			
+			#scroll-body #scroll-drag {
+				margin-top: 36px;
+				width: 100%;
+				height: 80px;
+				background-color: #89DE54;
+				position: relative;
+				border-radius: 15px;
+			}
+			
+			#scroll-main {
+				position: relative;
+				height: calc(100% - 36px * 2);
+				background-color: #473E39;
+			}
+			
+			#scroll-body .btn {
+				border-top-left-radius: 15px;
+				border-top-right-radius: 15px;
+				width: 100%;
+				text-align: center;
+				position: absolute;
+				font-weight: 900;
+				line-height: 30px;
+				height: 36px;
+				background-color: silver;
+			}
+			
+			#btn-down {
+				border-radius: 0 !important;
+				border-bottom-left-radius: 15px !important;
+				border-bottom-right-radius: 15px !important;
+				bottom: 0;
+			}
+			
+			#go,
+			#user {
+				cursor: pointer !important;
+			}
+		</style>
+	</head>
+
+	<body>
+		<nav class="navbar navbar-inverse navbar-fixed-top ">
+
+			&nbsp;
+			<div class="container">
+				<div class="navbar-header">
+
+					<div class="navbar-brand" style="color: white !important;"> <span id="go" class="glyphicon glyphicon-chevron-left"> &#x3000</span>（7）模拟窗口滚动</div>
+					<span id="user" class="navbar-brand glyphicon glyphicon-user pull-right" style="position: absolute;right: 25px;"></span>
+				</div>
+
+				<!--/.nav-collapse -->
+			</div>
+		</nav>
+		<br /><br /> <br />
+		<div id="main">
+			<div id="text-body">
+				<div class="text-content">
+
+					Again, you can't connect the dots looking forward; you can only connect them looking backwards. So you have to trust that the dots will somehow connect in your future. You have to trust in something - your gut, destiny, life, karma, whatever. This approach has never let me down, and it has made all the difference in my life. 再次说明的是,你在向前展望的时候不可能将这些片断串连起来；你只能在回顾的时候将点点滴滴串连起来。所以你必须相信这些片断会在你未来的某一天串连起来。你必须要相信某些东西：你的勇气、目的、生命、因缘。这个过程从来没有令我失望，只是让我的生命更加地与众不同而已。 I'm pretty sure none of this would have happened if I hadn't been fired from Apple. It was awful tasting medicine, but I guess the patient needed it. Sometimes life hits you in the head with a brick. Don't lose faith. I'm convinced that the only thing that kept me going was that I loved what I did. You've got to find what you love. And that is as true for your work as it is for your lovers. Your work is going to fill a large part of your life, and the only way to be truly satisfied is to do what you believe is great work. And the only way to do great work is to love what you do. If you haven't found it yet, keep looking. Don't settle. As with all matters of the heart, you'll know when you find it. And, like any great relationship, it just gets better and better as the years roll on. So keep looking until you find it. Don't settle. 我可以非常肯定,如果我不被苹果公司开除的话，这其中一件事情也不会发生的。这个良药的味道实在是太苦了，但是我想病人需要这个药。有些时候，生活会拿起一块砖头向你的脑袋上猛拍一下。不要失去信心，我很清楚唯一使我一直走下去的，就是我做的事情令我无比钟爱。你需要去找到你所爱的东西，对于工作是如此，对于你的爱人也是如此。你的工作将会占据生活中很大的一部分。你只有相信自己所做的是伟大的工作，你才能怡然自得。如果你现在还没有找到，那么继续找、不要停下来、全心全意的去找，当你找到的时候你就会知道的。就像任何真诚的关系，随着岁月的流逝只会越来越紧密。所以继续找，直到你找到它，不要停下来。 Remembering that I'll be dead soon is the most important tool I've ever encountered to help me make the big choices in life. Because almost everything -- all external expectations, all pride, all fear of embarrassment or failure - these things just fall away in the face of death, leaving only what is truly important. Remembering that you are going to die is the best way I know to avoid the trap of thinking you have something to lose. You are already naked. There is no reason not to follow your heart. 记住自己不久就将死去，这是我发现的最重要的工具，帮助我做出人生中的重大决定。因为几乎所有事情----外人的期待，内心的骄傲，对于失败或出丑的恐惧----所有这些事情在死亡面前，都会消失，只留下那些真正重要的事情。记住你将要死，这是我所知道最好方法，免于念念不忘你可能会失去某件东西。你已经赤身裸体了，没有理由不跟随你的内心。
+
+				</div>
+			</div>
+			<div id="scroll-body">
+				<div class="btn" id="btn-up">
+					△
+				</div>
+				<div id="scroll-main">
+					<div class="" id="scroll-drag">
+
+					</div>
+				</div>
+
+				<div class="btn" id="btn-down">
+					▽
+				</div>
+			</div>
+		</div>
+		<script src="js/move.js" type="text/javascript" charset="utf-8"></script>
+
+		<script type="text/javascript">
+			var go = document.getElementById('go')
+			var user = document.getElementById('user')
+			go.onclick = function() {
+				window.history.go(-1)
+			}
+
+			user.onclick = function() {
+				window.location.href = '../../user/index.html'
+			}
+			var $ = function(selector, isArr) {
+				if(isArr) {
+					return document.querySelectorAll(selector);
+				}
+				return document.querySelector(selector);
+
+			}
+
+			function getRect(elem) {
+
+				return elem.getBoundingClientRect();
+			}
+			window.onload = function() {
+
+				var main = $('#main');
+				var textContent = $('.text-content')
+				var scrollBody = $('#scroll-body');
+				var scrollMain = $('#scroll-main')
+				var drag = $('#scroll-drag');
+				var btn = $('.btn')
+				var btnArr = $('.btn', true)
+
+				var scroll = {};
+				scroll.up = btnArr[0];
+				scroll.down = btnArr[1];
+				scroll.btn = drag
+				scroll.bar = scrollMain;
+				scroll.body = scrollBody;
+
+				// 鼠标按下 
+				drag.onmousedown = function(e) {
+					var top = e.clientY - drag.offsetTop;
+					document.onmousemove = function(e) {
+						var y = e.clientY - top
+						// 控制移动范围 
+						if(y < 0) {
+							y = 0
+						} else if(y > scrollMain.clientHeight - drag.clientHeight) {
+							y = scrollMain.clientHeight - drag.clientHeight
+						}
+						// *:求出 移动比例 
+						scaleY = y / (scrollMain.clientHeight - drag.clientHeight)
+						drag.style.top = y + 'px';
+						textContent.style.top = -(textContent.clientHeight - main.clientHeight) * scaleY + 'px'
+
+					};
+					// 鼠标松下清除move事件
+					document.onmouseup = function() {
+						this.onmousemove = null;
+					}
+				};
+
+				scroll.bar.onmousedown = function(e) {
+
+					if(scroll.bar.timer) clearTimeout(scroll.bar.timer)
+
+					if(e.clientY < getRect(scroll.btn).top) {
+
+						verticalMove(scroll.btn, 'up', scrollText);
+						scroll.bar.timer = setInterval(function() {
+							verticalMove(scroll.btn, 'up', scrollText)
+							if(e.clientY >= getRect(scroll.btn).top) clearInterval(scroll.bar.timer)
+						}, 100)
+
+					} else if(e.clientY > getRect(scroll.btn).bottom) {
+						verticalMove(scroll.btn, 'down', scrollText)
+						scroll.bar.timer = setInterval(function() {
+							verticalMove(scroll.btn, 'down', scrollText)
+							if(e.clientY <= getRect(scroll.btn).top) clearInterval(scroll.bar.timer)
+						}, 100)
+					}
+
+					scroll.bar.onmouseup = function() {
+						clearInterval(scroll.bar.timer);
+					}
+
+				}
+
+				// 按下滚动
+
+				scroll.up.onmousedown = scroll.down.onmousedown = function(e) {
+
+					var direction = e.target == scroll.up ? 　'up' : 'down';
+
+					if(this.tiemr) clearInterval(this.tiemr);
+
+					verticalMove(scroll.btn, direction, scrollText);
+
+					this.tiemr = setInterval(function() {
+
+						verticalMove(scroll.btn, direction, scrollText)
+					}, 100)
+
+					this.onmouseup = function() {
+						clearInterval(this.tiemr)
+
+					}
+				}
+
+				function scrollText(instant) {
+					if(scroll.btn.timer) clearInterval(scroll.btn.timer);
+					var scale = scroll.btn.offsetTop / (scroll.bar.offsetHeight - scroll.btn.offsetHeight)　
+					cale = scale > 1 ? 1 : scale
+					var textTop = -scale * (textContent.offsetHeight - textContent.parentNode.offsetHeight);
+					textContent.style.top = textTop + 'px';
+
+				}
+
+				addWeel(main)
+
+				function verticalMove(elem, direction, callback) {
+
+					if(elem.tiemr) clearInterval(elem.tiemr)
+
+					var step = direction == 'up' ? -15 : (direction == 'down' ? 15 : direction)
+
+					var parRect = getRect(elem.parentNode)
+					var t = getRect(elem).top + step;
+
+					t = t < parRect.top ? parRect.top : t;
+					t = t > parRect.bottom - elem.offsetHeight ? parRect.bottom - elem.offsetHeight : t;
+
+					if(direction == 'up' || direction == 'down') {
+						elem.style.top = t - parRect.top + 'px';
+					} else {
+						elem.style.top = t - parRect.top + 'px';
+					}
+
+					callback();
+				}
+
+				function addWeel(obj) {
+					obj.onmousewheel = fn;
+					obj.addEventListener('DOMMouseScroll', fn);
+
+					function fn(e) {
+
+						if(e.wheelDelta > 0 || e.detail < 0) {
+							verticalMove(scroll.btn, 'up', function() {
+								scrollText()
+							})
+
+						} else if(e.wheelDelta < 0 || e.detail > 0) {
+							verticalMove(scroll.btn, 'down', function() {
+								scrollText()
+							})
+						}
+						e.preventDefault();
+						return false;
+					};
+
+				}
+			}
+		</script>
+	</body>
+	<!-- by guanguan 2016/11/03-->
+
+</html>

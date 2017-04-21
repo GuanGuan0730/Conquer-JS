@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+		<title>闭包应用——购物车计算</title>
+		<style type="text/css">
+			html,
+			body {
+				width: 100%;
+				height: 100%;
+				background-color: rgb(238, 238, 238);
+			}
+			
+			#go,
+			#user {
+				cursor: pointer !important;
+			}
+			
+			table {
+				border-collapse: collapse;
+				width: 600px;
+				margin: 50px auto 20px auto;
+				border: none;
+			}
+			
+			td {
+				width: 150px;
+				padding: 0 50px;
+				height: 40px;
+				border: none;
+			}
+			
+			tfoot {
+				width: 100%;
+			}
+			
+			h2 {
+				text-align: center;
+				margin: 50px 0 -20px 0;
+			}
+			
+			p {
+				width: 450px;
+				margin: 0 auto;
+				border-top: solid 1px gray;
+				padding: 10px;
+				text-align: center;
+			}
+			
+			.nmu,
+			ins,
+			p>span {
+				font-size: 18px;
+				padding: 0 5px;
+				font-weight: 900;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<nav class="navbar navbar-inverse navbar-fixed-top ">
+			<div class="container">
+				<div class="navbar-header">
+
+					<div class="navbar-brand" href="#" style="color: white !important;"> <span id="go" href="" class="glyphicon glyphicon-chevron-left"> &#x3000</span>（3）闭包应用——购物车计算</div>
+					<span href="" id="user" class="navbar-brand glyphicon glyphicon-user pull-right" style="position: absolute;right: 25px;"></span>
+				</div>
+
+			</div>
+		</nav>
+		<hr />
+
+		<br /><br />
+		<h2>	 商品合计</h2>
+		<table border="" cellspacing="" cellpadding="">
+
+			<tr>
+				<td> <button>-</button> <span class="nmu">
+			 		0
+			 	</span><button>+</button> </td>
+				<td> 单价 ：34</td>
+				<td> 小计 ：<ins>0</ins></td>
+			</tr>
+			<tr>
+				<td> <button>-</button> <span class="nmu">
+			 		0
+			 	</span><button>+</button> </td>
+				<td> 单价 ： 24</td>
+				<td> 小计 ：<ins> 0</ins></td>
+			</tr>
+			<tr>
+				<td> <button>-</button> <span class="nmu">
+			 		0
+			 	</span><button>+</button> </td>
+				<td> 单价 ： 10</td>
+				<td> 小计 ：<ins> 0</ins></td>
+			</tr>
+			<tr>
+				<td> <button>-</button> <span class="nmu">
+			 		0
+			 	</span><button>+</button> </td>
+				<td> 单价 ： 1.5 </td>
+				<td> 小计 ：<ins> 0</ins></td>
+
+			</tr>
+
+		</table>
+		<p> 共买了 <span id="number"> 0</span>商品 最贵的是 <span id="max">0</span> 合计 <span id="total">0</span></p>
+
+	</body>
+	<script type="text/javascript">
+		var btn = document.querySelectorAll('button');
+		var ins = document.querySelectorAll('ins');
+		var $ = function(id) {
+			return document.getElementById(id)
+		};
+		var heji = $('number');
+		var max = $('max');
+		var total = $('total');
+		var num = document.getElementsByClassName('nmu');
+		var subtotalArr = [0, 0, 0, 0];
+		var moneyArr = [34, 24, 10, 1.5];
+		var newarr = [0, 0, 0, 0];
+		var maxarr = [0, 0, 0, 0];
+
+		for(var i = 0; i < btn.length; i++) {
+			(function(x) {
+
+				btn[i].onclick = function() {
+
+					istrue = x % 2 == 1 ? 1 : -1;
+					arrindex = Math.floor(x / 2);
+					if(istrue == 1) {
+
+						var num1 = subtotalArr[arrindex] + istrue;
+						num[arrindex].innerText = num1;
+						ins[arrindex].innerText = num1 * moneyArr[arrindex];
+						subtotalArr[arrindex] = num1;
+						newarr[arrindex] = num1 * moneyArr[arrindex]
+						maxarr[arrindex] = moneyArr[arrindex];
+
+						f1 = function() {
+							max.innerText = Math.max.apply(null, maxarr)
+							heji.innerText = subtotalArr.reduce(function(prev, item) {
+								return prev + item
+							})
+							total.innerText = newarr.reduce(function(prev, item) {
+								return prev + item
+							})
+
+						};
+
+						return f1();
+					} else {
+						var num1 = subtotalArr[arrindex] + istrue;
+						var num1 = num1 < 0 ? 0 : num1;
+
+						ins[arrindex].innerText = num1 * moneyArr[arrindex];
+						num[arrindex].innerText = num1;
+
+						subtotalArr[arrindex] = num1;
+						newarr[arrindex] = num1 * moneyArr[arrindex];
+						maxarr[arrindex] = num1 == 0 ? 0 : moneyArr[arrindex];
+						return f1();
+
+					}
+
+				}
+
+			}(i))
+		}
+
+		var go = document.getElementById('go')
+		var user = document.getElementById('user')
+		go.onclick = function() {
+			window.history.go(-1)
+		}
+
+		user.onclick = function() {
+			window.location.href = '../../user/index.html'
+		}
+	</script>
+	<!--by guanguan 2016/12/01-->
+
+</html>

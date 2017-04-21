@@ -1,0 +1,30 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: url(../image/bg.jpg) 0 / cover fixed;
+  position: relative;
+}
+div {
+  width: 220px;
+  height: 220px;
+  background: url(../image/sun.png);
+  background-size: 220px 220px;
+  position: absolute;
+  top: 240px;
+}
+div:hover {
+  cursor: pointer;
+}
+div::before {
+  content: "";
+  width: 66px;
+  box-shadow: 0 0 20px 3px #fff;
+  position: absolute;
+  bottom: 40px;
+  left: 66px;
+}
+#go,
+			#user {
+				cursor: pointer !important;
+			}

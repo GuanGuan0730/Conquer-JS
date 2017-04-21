@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>数据类型转换.html</title>
+		<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+		<style>
+			main {
+				border: solid 1px darkgray;
+				padding: 20px;
+				width: 500px;
+				margin: 0 auto;
+			}
+			
+			div {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				flex-wrap: wrap;
+			}
+			
+			button {
+				margin-top: 5px;
+				padding: 5px 25px;
+				border: none;
+				background-color: gray;
+				color: white;
+				border-radius: 5px;
+			}
+			
+			label {
+				display: block;
+				font-weight: 900;
+				color: darkslategrey;
+				text-align: center;
+				margin: 15px;
+			}
+			
+			#go,
+			#user {
+				cursor: pointer!important;
+			}
+		</style>
+	</head>
+
+	<body>
+		<nav class="navbar navbar-inverse navbar-fixed-top ">
+			<div class="container">
+				<div class="navbar-header">
+
+					<div class="navbar-brand " href="#" style="color: white !important;position: absolute;left: 50px !important; ">
+
+						<span id="go" href="" class="glyphicon glyphicon-chevron-left "> &#x3000</span>
+					</div>
+					<span class="navbar-brand text-center " style="color: white;" > （1）数据类型与基本语法</span>
+				</div>
+				<span href="" id="user" class="navbar-brand glyphicon glyphicon-user pull-right" style="position: absolute;right: 25px;"></span>
+				<!--/.nav-collapse -->
+			</div>
+		</nav>
+		<br />
+		<br />
+		<br />
+		<main>
+
+			<div>
+				<form action="#">
+					<label for="textArea">请输入数组或默认值</label>
+					<textarea id="textArea" rows="5" cols="30"></textarea>
+				</form>
+				<button id="btn"> 提交</button>
+			</div>
+
+			<div>
+				<label for="contentN">数组中含有数字</label>
+				<input type="text" id="contentN" />
+				<label for="changeN">能被转换为数字的</label>
+				<input type="text" id="changeN" />
+				<label for="maxN">转换后数值最大的</label>
+				<input type="text" id="maxN" />
+				<label for="nanP">数组中NaN的位置</label>
+				<input type="text" id="nanP" />
+			</div>
+		</main>
+		<script type="text/javascript">
+			window.addEventListener('load', function() {
+
+				//定义一个函数：通过Id获取节点,调用时传入参数返回相对应节点；
+				//调用函数split(",")使用','把字符串分割成字符串数组；
+				//调用函数join(',')把数组中数据用","拼接起来；
+				var $ = function(id) {
+					return document.getElementById(id)
+				};
+				var textArr = $('textArea');
+				$('btn').addEventListener('click', function() {
+
+					var numberArr = new Array(),
+						changeArr = new Array(),
+						maxArr = new Array(),
+						maxNumber = -Infinity;
+					nanArr = new Array();
+					//  用" , "当做分隔符 把获取到的字符串 转换为一个数组。
+					data = textArr.value.split(',')
+
+					for(var i = 0; i < data.length; i++) {
+						if(!isNaN(data[i])) {
+							maxNumber = (data[i]) > (maxNumber) ? data[i] : maxNumber;
+							numberArr.push(data[i]);
+							changeArr.push(data[i]);
+						} else if(parseInt(data[i]) || parseFloat(data[i])) {
+							changeArr.push(data[i]);
+						} else {
+							nanArr.push(i)
+						}
+					}
+					$('contentN').value = numberArr.join(',');
+					$('changeN').value = changeArr.join(',');
+					$('maxN').value = maxNumber;
+					$('nanP').value = nanArr.join(',');
+				});　
+			})
+
+			var go = document.getElementById('go')
+			var user = document.getElementById('user')
+			go.onclick = function() {
+				window.history.go(-1)
+			}
+
+			user.onclick = function() {
+				window.location.href = '../../user/index.html'
+			}
+		</script>
+	</body>
+	<!-- by guanguan 2016/11/25-->
+
+</html>

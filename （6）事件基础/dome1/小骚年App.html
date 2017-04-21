@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>小骚年APP</title>
+		<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+		<style type="text/css">
+			main {
+				width: 350px;
+				height: 714px;
+				background-image: url(image/hw7-1/iPhone.png);
+				background-size: contain;
+				margin: 50px auto 0 auto;
+				position: relative;
+				z-index: 10000;
+			}
+			
+			.myapp {
+				position: absolute;
+				top: 85px;
+				left: 22px;
+				width: 305px;
+				height: 540px;
+				border: solid 1px rgb(26, 26, 26);
+				border-bottom: solid 13px rgb(26, 26, 26);
+				overflow: hidden;
+			}
+			
+			.header {
+				height: 22px;
+				background-image: url(image/hw7-1/header.png);
+				background-size: contain;
+				background-repeat: no-repeat;
+				background-position: center center;
+				background-color: rgb(26, 26, 26);
+			}
+			
+			.header time {
+				color: white;
+				position: absolute;
+				left: calc((50% - 22.5px));
+				text-align: center;
+				font-size: 10px;
+				padding: 10px;
+				background-color: rgb(26, 26, 26);
+			}
+			
+			.app_title {
+				background-color: #000000;
+				line-height: 40px;
+				text-align: center;
+				background-color: rgb(26, 26, 26);
+				color: white;
+				font-weight: 900;
+			}
+			
+			.app_body {
+				box-sizing: border-box;
+				height: 430px;
+				padding: 10px 10px 15px 10px;
+				background-color: rgb(236, 236, 237);
+				border-bottom: solid 2px #FFFFFF;
+				overflow-y: scroll;
+			}
+			
+			.app_footer {
+				padding: 5px 10px;
+				background-color: white;
+				position: relative;
+				z-index: 1000;
+			}
+			
+			.app_footer input {
+				width: 180px;
+				padding: 0 5px;
+				height: 30px;
+			}
+			
+			.btn {
+				width: 35px;
+				display: inline-block;
+				line-height: 35px !important;
+				text-align: center;
+				border-radius: 50%;
+				background-color: rosybrown;
+				display: inline-block;
+				color: white;
+				font-weight: 900;
+			}
+			
+			.btn_left {
+				background-color: darkorange;
+			}
+			
+			.username_right {
+				float: right!important;
+				background-color: rosybrown;
+			}
+			
+			.username_right+.chatContent {
+				float: right;
+				left: -10px;
+			}
+			
+			.app_footer+ul {
+				margin: 0;
+				float: right;
+				width: 120px;
+				list-style: none;
+				position: relative;
+				z-index: 0;
+			}
+			
+			.app_footer+ul li {
+				padding: 10px 20px;
+				background-color: darkgrey;
+			}
+			
+			.app_footer+ul li:nth-child(2) {
+				background-color: gainsboro;
+			}
+			
+			.app_body ul {
+				padding: 0;
+				padding-top: 3px;
+				margin: 0;
+				list-style: none;
+			}
+			
+			#message>li {
+				padding-bottom: 40px;
+				clear: both;
+			}
+			
+			#message span {
+				float: left;
+			}
+			
+			.chatContent {
+				float: left;
+				margin-bottom: 20px;
+				display: inline-block;
+				padding: 5px 10px;
+				word-break: break-all;
+				max-width: 150px;
+				font-size: 12px;
+				position: relative;
+				left: 10px;
+				top: 10px;
+				box-shadow: 0 0 2px #473E39;
+				background-color: white;
+				border-radius: 5px;
+			}
+			
+			#go,
+			#user {
+				cursor: pointer !important;
+			}
+		</style>
+	</head>
+
+	<body>
+		<nav class="navbar navbar-inverse navbar-fixed-top ">
+			&nbsp;
+			<div class="container">
+				<div class="navbar-header">
+
+					<div class="navbar-brand" href="#" style="color: white !important;"> <span id="go" href="" class="glyphicon glyphicon-chevron-left"> &#x3000</span>（6）管少年App</div>
+					<span href="" id="user" class="navbar-brand glyphicon glyphicon-user pull-right" style="position: absolute;right: 25px;"></span>
+				</div>
+
+				<!--/.nav-collapse -->
+			</div>
+		</nav>
+		<main>
+			<div class="myapp">
+				<div class="header">
+					<time> 000000000</time>
+				</div>
+				<div class="app_title">
+					小骚年~
+				</div>
+				<div class="app_body">
+					<ul id="message">
+						<li>
+
+							<span class="btn btn_left" id="username">J</span>
+							<div class="chatContent">葡萄美酒夜光杯，欲饮琵琶马上催。醉卧沙场君莫笑，古来征战几人回</div>
+
+						</li>
+						<li> <span class="btn username_right"> G</span>
+							<div class="chatContent">
+								嗨
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="app_footer">
+
+					<div class="btn btn_left" id="toggleBtn">
+						J
+					</div>
+					<input type="input" id="textBox" value="" />
+					<div class="btn btn_right" id="optionBtn">+</div>
+				</div>
+				<ul id="enter">
+					<li>Enter发送</li>
+					<li>Ctral+Enter</li>
+				</ul>
+			</div>
+
+		</main>
+
+		<script type="text/javascript">
+			window.onload = function() {
+
+				function $(selector, isArr) {
+
+					if(isArr) {
+						return document.getElementsByClassName(selector)
+					}
+					return document.querySelector(selector);
+				}
+
+				var isAdd = true;
+				var i = 0;
+				var textBox = $('#textBox');
+				var toggle = $('.btn_left');
+				var dispatch = $('.btn_right')
+				var enter = $('#enter')
+				var appBody = $('.app_body')
+				var messageBody = $('#message');
+				var appFooter = $('.app_footer');
+				var userName;
+				var username_right = '';
+
+				dispatch.onclick = function() {
+					enter.classList.add('rmoval')
+
+					var removal = setInterval(anmite, 1)
+
+					function anmite() {
+						i = isAdd ? (i + 1) : (i - 1)
+
+						if(i > 130) {
+							isAdd = false;
+							clearInterval(removal)
+
+						}
+						if(i < -5) {
+							clearInterval(removal)
+
+							isAdd = true;
+						}
+						enter.style.bottom = i + 'px';
+					}
+
+				}
+
+				function sendMessage(value) {
+					var li = document.createElement('li');
+					li.innerHTML = '<span class="btn btn_left ' + username_right + '"  >' + userName +
+						'</span>' + '<div class="chatContent">' + value + '</div>';
+					messageBody.appendChild(li);
+				}
+
+				textBox.onkeydown = function(event) {
+					var ctrl = event.ctrlKey;
+					if(this.value != '') {
+
+						if(event.keyCode == '13' || (ctrl && event.keyCode == '13')) {
+							var h = appBody.offsetHeight
+							var sH = messageBody.offsetHeight
+							var ss = sH > h ? (sH - h + 60) : ' ';
+							sendMessage(this.value)
+							this.value = '';
+							appBody.scrollTop = ss;
+						}
+
+					}
+				}
+
+				appFooter.onclick = function(event) {
+					var target = event.target;
+					userName = $('#toggleBtn').innerText;
+
+					if(userName == 'J' && target.id == 'toggleBtn') {
+						target.innerText = 'G';
+						console.log('G')
+						username_right = 'username_right'
+						target.style.backgroundColor = ' rosybrown';
+					} else if(target.id == 'toggleBtn') {
+						target.innerText = 'J';
+						console.log('J')
+						username_right = ''
+						target.style.backgroundColor = 'darkorange';
+
+					}
+
+				}
+				enter.onclick = function(event) {
+					var target = event.target;
+					if(target.tagName == 'LI') {
+						console.log(target.tagName);
+					}
+				}
+
+				displayTime(new Date())
+
+				function displayTime(d) {
+					$('time').innerHTML = padZero(d.getHours()) + ':' + padZero(d.getMinutes())
+				}
+				setInterval(function() {
+					var data = new Date()
+					displayTime(data)
+				}, 60000)
+
+				function padZero(num) {
+					if(typeof num == 'number' && num < 10) return '0' + num
+					return num + '';
+				}
+				var go = document.getElementById('go')
+				var user = document.getElementById('user')
+				go.onclick = function() {
+					window.location.href = "../index.html"
+				}
+
+				user.onclick = function() {
+					window.location.href = '../../user/index.html'
+				}
+			}
+		</script>
+	</body>
+	<!-- by GuanGuan 2016/10/25-->
+
+</html>

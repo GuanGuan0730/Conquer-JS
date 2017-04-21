@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>条件判断</title>
+		<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+		<style type="text/css">
+			label {
+				display: block;
+				font-size: 20px;
+				font-weight: 900;
+			}
+			
+			form {
+				margin: 200px 0;
+				padding: 20px;
+				border: solid #222222 1px;
+				display: flex;
+				flex-wrap: wrap;
+				flex-direction: column;
+				/*align-content: center;*/
+				align-content: center;
+				text-align: center;
+			}
+			
+			input {
+				padding: 10px 25px;
+				margin: 20px 0;
+			}
+			
+			#go,
+			#user {
+				cursor: pointer !important;
+			}
+		</style>
+	</head>
+
+	<body>
+		<nav class="navbar navbar-inverse navbar-fixed-top ">
+			<div class="container">
+				<div class="navbar-header">
+
+					<div class="navbar-brand " href="#" style="color: white !important;"> <span id="go" href="" class="glyphicon glyphicon-chevron-left  "> &#x3000</span>（1）条件判断</div>
+					<span href="" id="user" class="navbar-brand glyphicon glyphicon-user pull-right" style="position: absolute;right: 25px;"></span>
+				</div>
+
+				<!--/.nav-collapse -->
+			</div>
+		</nav>
+
+		<form action="#">
+			<label for=""> 成绩查询系统</label>
+			<input id="input" type="text" value="" placeholder="请输入成绩查询哦" />
+			<button id="btn">提交</button>
+			<p id="class"></p>
+		</form>
+
+		<script type="text/javascript">
+			var $ = function(id) {
+				return document.getElementById(id);
+			}
+			var mark = '请输入0~100之内的数字'
+			$('btn').addEventListener('click', function() {
+				//				var score = $('input').value;
+
+				// if判断
+				//		 		if(score>100){
+				//		 			 mark = '恭喜您：打倒高富帅，战胜富二代！'
+				//		 		}else if( score>=91 && score<=100){
+				//		 			mark = '一等生';
+				//		 		}else if( score>=81 && score<=90){
+				//		 			mark = '二等生';
+				//		 		}else if( score>=71 && score<=80){
+				//		 			mark = '三等生';
+				//		 		}else if( score>=61 && score<=70){
+				//		 			mark = '四等生';
+				//		 		}else if( score>=51 && score<=60){
+				//		 			mark = '五等生';
+				//		 		}else if( score>=41 && score<=50){
+				//		 			mark = '六等生';
+				//		 		}else if( score>=31 && score<=40){
+				//		 			mark = '七等生';
+				//		 		}else if( score>=21 && score<=30){
+				//		 			mark = '八等生';
+				//		 		}else if( score>=11 && score<=20){
+				//		 			mark = '九等生';
+				//		 		}else if(score<=10){
+				//		 			mark = '10等生';
+				//		 		}
+				//		 		
+				//		 		$('class').innerText='你是'+mark
+				//		 		 
+				var score = Math.floor($('input').value / 10);
+				var numbe;
+
+				// 求解如何正确计算出名次
+				if(isNaN(score)) {
+					$('class').innerText = '不是一个数字'
+				} else if(Math.floor(score) >= 0 && Math.floor(score) <= 10) {
+					numbe = score / 10;
+					numbe = numbe < 1 ? numbe * 10 : score;
+					$('class').innerText = '你是' + numbe + '等生';
+				} else {
+					$('class').innerText = '请输入0~100分数哦'
+				}
+
+			})
+			 
+			var go = document.getElementById('go')
+			var user = document.getElementById('user')
+			go.onclick = function() {
+				window.history.go(-1)
+			}
+
+			user.onclick = function() {
+				window.location.href = '../../user/index.html'
+			}
+		</script>
+
+		<!-- by guanguan 2016/11/23-->
+	</body>
+
+</html>

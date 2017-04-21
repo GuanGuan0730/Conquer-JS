@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+		<title>for循环经典使用</title>
+		<style type="text/css">
+			section.stage {
+				width: 100%;
+				height: 800px;
+				background-color: #000000;
+				position: relative;
+			}
+			
+			div.div {
+				width: 15px;
+				height: 15px;
+				position: absolute;
+				border-radius: 50%;
+				background-color: greenyellow;
+			}
+			
+			#go,
+			#user {
+				cursor: pointer !important;
+			}
+		</style>
+	</head>
+
+	<body>
+		<nav class="navbar navbar-default navbar-fixed-top ">
+			<div class="container">
+				<div class="navbar-header">
+
+					<div class="navbar-brand " href="#" style="color: black !important;"> <span id="go" href="" class="glyphicon glyphicon-chevron-left  "> &#x3000</span>（1）for循环经典使用</div>
+					<span href="" id="user" class="navbar-brand glyphicon glyphicon-user pull-right" style="position: absolute;right: 25px;"></span>
+				</div>
+
+				<!--/.nav-collapse -->
+			</div>
+		</nav>
+		<section id="stage" class="stage">
+
+		</section>
+	</body>
+	<script type="text/javascript">
+		window.addEventListener('load', function() {
+			var stage = document.getElementById('stage');
+			var arr = [];
+			index = 0;　
+			for(var i = 0; i < 10; i++) {
+				var div = document.createElement('div');
+				arr.push(div);
+				div.index = i;
+				div.className = 'div';
+
+			};
+			console.log(arr)
+			//			clientX 事件属性返回当事件被触发时鼠标指针向对于浏览器页面（或客户区）的水平坐标。
+			stage.addEventListener('mousemove', function(event) {
+				var posX = event.clientX;
+				var posY = event.clientY;
+				currentDiv = arr[index];
+				//				console.log(arr)
+				//					如果不在for循环内,也可以使用下面的表达式做增量操作
+				//					index = (index+1)%100;
+				//				做增量操作，让index在0~100范围内
+
+				index = (index + 1) % 10;
+				//				console.log(index)
+				currentDiv.style['left'] = posX + 'px';
+				currentDiv.style['top'] = posY + 'px';
+				stage.appendChild(currentDiv)
+			})
+
+		})
+		 
+		var go = document.getElementById('go')
+		var user = document.getElementById('user')
+		go.onclick = function() {
+			window.history.go(-1)
+		}
+
+		user.onclick = function() {
+			window.location.href = '../../user/index.html'
+		}
+	</script>
+	<!-- by guanguan 2016/11/25-->
+
+</html>

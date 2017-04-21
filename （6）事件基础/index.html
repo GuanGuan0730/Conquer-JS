@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>（6）事件基础</title>
+
+		<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+		<style>
+			.jumbotron {
+				margin: 15px !important;
+			}
+			
+			#go,
+			#user {
+				cursor: pointer !important;
+			}
+			
+			h3 {
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+		</style>
+	</head>
+
+	<body>
+		<nav class="navbar navbar-inverse navbar-fixed-top ">
+			<div class="container">
+				<div class="navbar-header">
+
+					<div class="navbar-brand" href="#" style="color: white !important;"> <span id="go" href="" class="glyphicon glyphicon-chevron-left"> &#x3000</span>（6）事件基础</div>
+					<span href="" id="user" class="navbar-brand glyphicon glyphicon-user pull-right" style="position: absolute;right: 25px;"></span>
+				</div>
+
+				<!--/.nav-collapse -->
+			</div>
+		</nav>
+		<br></br>
+
+		<br></br>
+		<div class="container" style="max-width: 90vw !important;width: 90vw !important; margin: 0 auto !important; ">
+			<div class="jumbotron col-md-3">
+				<h3>
+					1-小骚年App 
+						</h3>
+				<p>
+					All presentations are native JS written
+				</p>
+				<p>
+					<a class="btn btn-primary btn-large" href="dome1/小骚年App.html">Good immediately</a>
+				</p>
+			</div>
+			<div class="jumbotron col-md-3">
+				<h3>
+					 2-拖动滑块. 
+						</h3>
+				<p>
+					All presentations are native JS written
+				</p>
+				<p>
+					<a class="btn btn-primary btn-large" href="dome2/拖动滑块.html">Good immediately</a>
+				</p>
+			</div>
+			<div class="jumbotron col-md-3">
+				<h3>
+					 3-嗯哼放大镜. 
+						</h3>
+				<p>
+					All presentations are native JS written
+				</p>
+				<p>
+					<a class="btn btn-primary btn-large" href="dome3/嗯哼‘放大镜.html">Good immediately</a>
+				</p>
+			</div>
+
+		</div>
+		<script type="text/javascript">
+			var go = document.getElementById('go')
+			var user = document.getElementById('user')
+			go.onclick = function() {
+				window.location.href = "../index.html"
+			}
+
+			user.onclick = function() {
+				window.location.href = '../user/index.html'
+			}
+		</script>
+	</body>
+
+</html>

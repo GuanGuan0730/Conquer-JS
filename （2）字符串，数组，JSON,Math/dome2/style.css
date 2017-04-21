@@ -1,0 +1,70 @@
+		html {
+			height: 100%;
+		}
+		
+		body {
+			width: 100%;
+		}
+		
+		main {
+			width: 600px;
+			padding: 50px;
+			margin: 100px auto;
+			border: solid 1px saddlebrown;
+			position: relative;
+		}
+		
+		header>div {
+			width: 50px;
+			position: absolute;
+			top: -25px;
+			right: -25px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 50px;
+			font-size: 50px;
+			border-radius: 50%;
+			font-weight: 900;
+			color: #6C4A57;
+			background-color: gainsboro;
+		}
+		
+		ul {
+			margin: 0;
+			border-bottom: 5px solid saddlebrown;
+			padding: 0;
+		}
+		
+		li {
+			display: inline-block;
+			padding: 10px 10px 0 10px;
+		}
+		
+		.hover {
+			background-color: burlywood;
+		}
+		
+		input {
+			display: block;
+			margin: 10px 10px 10px 0;
+		}
+		
+		#chaozhao,
+		#tihuan,
+		#ssk {
+			display: none;
+		}
+		
+		.none {
+			display: none;
+		}
+		
+		.block {
+			display: block;
+		}
+		
+		#go,
+		#user {
+			cursor: pointer !important;
+		}

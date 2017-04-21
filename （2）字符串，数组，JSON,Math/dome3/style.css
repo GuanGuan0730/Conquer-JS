@@ -1,0 +1,52 @@
+html {
+	height: 100%;
+	width: 100%;
+	background-color: palegoldenrod;
+}
+
+body {
+	height: 100%;
+}
+
+main {
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+}
+
+section {
+	width: 500px;
+	margin: 50px;
+	resize: none;
+	padding: 50px;
+	background-color: #DEB887;
+	font-size: 17px;
+}
+
+div {
+	align-self: flex-end;
+	position: relative;
+	top: -100px;
+}
+
+.none {
+	display: none;
+}
+
+.block {
+	display: block;
+}
+
+#paomadeng>span {
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background-color: red;
+}
+
+#go,
+#user {
+	cursor: pointer !important;
+}

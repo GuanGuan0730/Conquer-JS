@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>拼图游戏</title>
+		<style type="text/css">
+	/*大体思路：9个100*100的绝对定位的section,拖拉时改变其top和left的值*/
+			section[data-num="1"] {
+				background-position: 0 0;
+			}
+			
+			section[data-num="2"] {
+				background-position: -100px 0;
+			}
+			
+			section[data-num="3"] {
+				background-position: -200px 0;
+			}
+			
+			section[data-num="4"] {
+				background-position: 0 -100px;
+			}
+			
+			section[data-num="5"] {
+				background-position: -100px -100px;
+			}
+			
+			section[data-num="6"] {
+				background-position: -200px -100px;
+			}
+			
+			section[data-num="7"] {
+				background-position: 0 -200px;
+			}
+			
+			section[data-num="8"] {
+				background-position: -100px -200px;
+			}
+			
+			section[data-num="9"] {
+				background-position: -200px -200px;
+			}
+			
+			.pos1,
+			.pos2,
+			.pos3 {
+				top: 0;
+			}
+			
+			.pos4,
+			.pos5,
+			.pos6 {
+				top: 100px;
+			}
+			
+			.pos7,
+			.pos8,
+			.pos9 {
+				top: 200px;
+			} 
+			
+			.pos1,
+			.pos4,
+			.pos7 {
+				left: 0;
+			}
+			
+			.pos2,
+			.pos5,
+			.pos8 {
+				left: 100px;
+			}
+			
+			.pos3,
+			.pos6,
+			.pos9 {
+				left: 200px;
+			}
+			
+			h1 {
+				width: 500px;
+				height: 50px;
+				line-height: 50px;
+				margin: 100px auto 0;
+				padding: 0;
+				color: #ED6D50;
+				font-size: 30px;
+				text-align: center;
+				border-radius: 10px;
+			}
+			
+			main {
+				width: 300px;
+				height: 300px;
+				background-color: #fff;
+				display: flex;
+				flex-wrap: wrap;
+				margin: 20px auto 30px;
+				position: relative;
+			}  
+			
+			section {
+				display: inline-block;
+				width: 100px;
+				height: 100px;
+				border: 1px solid #fff;
+				box-sizing: border-box;
+				overflow: hidden;
+				position: absolute;
+				transition: all 0.5s;
+				background-image: url(3.jpg);
+				background-repeat: no-repeat;
+				z-index: 0;
+			}
+			
+			button {
+				display: block;
+				width: 150px;
+				height: 50px;
+				line-height: 50px;
+				font-size: 25px;
+				background-color:#71A53E;
+				margin: 0 auto;
+				border: none;
+				border-radius: 5px;
+				color:#fff;
+			}
+			
+			main>img {
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+		</style>
+	</head>
+
+	<body>
+		<h1>请记住图片的样子，开始游戏吧</h1>
+		<main>
+			<section data-num="1" class="pos1" draggable="true"></section>
+			<section data-num="2" class="pos2" draggable="true"></section>
+			<section data-num="3" class="pos3" draggable="true"></section>
+			<section data-num="4" class="pos4" draggable="true"></section>
+			<section data-num="5" class="pos5" draggable="true"></section>
+			<section data-num="6" class="pos6" draggable="true"></section>
+			<section data-num="7" class="pos7" draggable="true"></section>
+			<section data-num="8" class="pos8" draggable="true"></section>
+			<section data-num="9" class="pos9" draggable="true"></section>
+			<img src="3.jpg" alt="pic" id="bigPic">
+		</main>
+		<button>开始</button>
+		<script type="text/javascript">
+			var random;
+			var secs;
+			var clsName;
+			var btn = document.querySelector("button");
+			var secs = document.getElementsByTagName("section");
+			//arr数组的作用是为了产生不重复的随机数，利用do-while循环
+			var arr = [false, false, false, false, false, false, false, false, false];
+			
+     //------shuffle函数作用：点击开始按钮，随机变换9个section的(不重复)位置---
+			function shuffle() {
+				var bigPic = document.getElementById("bigPic")
+				bigPic.style.display = "none";
+				for(var i = 0; i < secs.length; i++) {
+					do {
+						random = Math.floor(Math.random() * 9 + 1);
+						secs[i].className = "pos" + random;
+					}
+					while (arr[random - 1]);
+					arr[random - 1] = true;
+				}
+		 arr = [false, false, false, false, false, false, false, false, false]
+				
+			}
+       //------------------shuffle函数结束--------------
+           
+           //--for循环：为每一个section添加拖拉对应的事件------
+			for(var i = 0; i < secs.length; i++) {
+				var sec = secs[i];
+				sec.ondragstart = function(e) {
+				clsName = this.className;
+				e.dataTransfer.setData("class", clsName);
+				}
+				sec.ondrop = function(e) {
+					var fClass = e.dataTransfer.getData("class");
+					fSec = document.getElementsByClassName(fClass)[0];
+					fSec.className = this.className;
+					this.className = fClass;
+				}
+				sec.ondragover = function(e) {
+					e.preventDefault();
+				}
+			}
+			//------------------for循环结束--------------
+			btn.addEventListener("click", shuffle, false);
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			body {
+				margin-top: 50px;
+				display: flex;
+				justify-content: space-around;
+			}
+			section,div {
+				width: 400px;
+				height: 620px;
+				border: 1px solid red;
+				box-sizing: border-box;
+			}
+			section{
+				border: 0;
+				background-image: url(images/看图识字.png);
+				background-size: 100%;
+				padding: 0 12px 0 19px;
+				padding-top: 70px;
+			}
+			p{
+				width: 86px;
+				height: 130px;
+				float: left;
+				margin: 0 6px 5px 0;
+				box-sizing: border-box;
+				text-align: center;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				padding-top: 45px;
+				box-shadow: 0 0 2px transparent;
+			}
+			img{
+				transition: 0.2s;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="">
+			<img src="" alt="" />
+			<img src="" alt="" />
+			<img src="" alt="" />
+			<img src="" alt="" />
+			<img src="" alt="" />
+			<img src="" alt="" />
+			<img src="" alt="" />
+			<img src="" alt="" />
+			<img src="" alt="" />
+			<img src="" alt="" />
+			<img src="" alt="" />
+			<img src="" alt="" />
+			<img src="" alt="" />
+			<img src="" alt="" />
+			<img src="" alt="" />
+			<img src="" alt="" />
+		</div>
+		<section>
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+		</section>
+	</body>
+    <script type="text/javascript">
+    	var imgs = document.querySelectorAll('div img');
+    	var parry = document.querySelectorAll('section p');
+    	var imgarry= new Array;
+    	var imgIndexs = new Array;
+    	var moveimg;
+    	
+    	
+    	for (var i=0; i<imgs.length;i++) {	
+    		imgarry.push(i);
+    	}													固定数组 :	 1 2 3 4 5 6 7 8 9
+    	for (var i=0;i<imgs.length;i++) {  						
+    															随机数 :
+    		var index = parseInt(Math.random()*imgarry.length);	取值范围  : 0  ~  9      
+    		imgIndexs.push(imgarry[index]);					 	
+    		imgarry.splice(index,1);							删除   0  1 
+    	}
+    	
+    	console.log(imgIndexs)
+    	for (var i=0;i<imgs.length;i++) {
+    		
+    		// 每次刷新数组中的每项 才会重置
+			// for循环给img添加src属性 
+			imgs[i].src = 'images/' + (imgIndexs[i] + 1) + '.png';
+    	    // 立即执行函数 (参数x) 为 (for循环的次数)
+    	     
+    	    (function(x){
+    	    	//给每个img添加 监听事件
+    	    	// 当发生拖拽事件后 才会执行函数
+    	    	imgs[x].ondragstart = function(e){
+    	    		 
+                    e.dataTransfer.setData("Text", imgIndexs[x]);
+                    e.dataTransfer.effectAllowed = 'move';
+                    moveimg = imgs[x];
+    	    	}
+    	    })(i);
+    	 
+    	     (function(x){
+    	    	parry[x].ondragover = function(e){
+    	    		e.target.style.boxShadow='0 0 2px blue'
+    	    	}
+    	    	parry[x].ondragleave = function(e){
+    	    		e.target.style.boxShadow='0 0 2px transparent'
+    	    	}
+    	    	parry[x].ondrop = function(e){
+    	    		e.target.style.boxShadow='0 0 2px transparent'
+    	    		var data = e.dataTransfer.getData("Text");
+    	    		if(data != x) return; 
+    	    		e.target.appendChild(moveimg);
+    	    	}
+    	    })(i)   	    
+    	}
+    	
+    	
+    	
+    	
+    	document.documentElement.addEventListener('drop',function(e){
+    		e.stopPropagation();
+    		e.preventDefault();
+    	})
+    </script>
+</html>

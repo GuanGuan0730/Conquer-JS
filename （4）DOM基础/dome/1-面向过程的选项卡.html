@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>1-面向过程选项卡</title>
+		<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+		<style>
+			p{
+				display: none;
+			}
+		</style>
+		<script>
+			window.onload=function(){
+				function tab(obj){
+					var btns=obj.querySelectorAll('input');
+					var ps=obj.querySelectorAll("p");
+					for(var i=0;i<btns.length;i++){
+						btns[i].index=i;
+						btns[i].onclick=function(){
+							for(var j=0;j<btns.length;j++){
+								btns[j].style.background='';
+								ps[j].style.display='none';
+							}
+							this.style.background='yellow';
+							ps[this.index].style.display='block';
+						};
+					}
+				}
+				
+				var div1=document.getElementById("div1");
+				tab(div1);
+				
+				var div2=document.getElementById("div2");
+				tab(div2);
+			};
+		</script>
+	</head>
+	<body>
+		<nav class="navbar navbar-inverse navbar-fixed-top ">
+			<div class="container">
+				<div class="navbar-header">
+
+					<div class="navbar-brand" href="#" style="color: white !important;"> <span id="go" href="" class="glyphicon glyphicon-chevron-left"> &#x3000</span>（3）闭包应用——购物车计算</div>
+
+				</div>
+
+			</div>
+		</nav>
+		<br /><br />
+		<div id="div1">
+			<input type="button" value="按钮一" style="background: yellow;" />
+			<input type="button" value="按钮二" />
+			<input type="button" value="按钮三" />
+			<p style="display: block;">内容一</p>
+			<p>内容二</p>
+			<p>内容三</p>
+		</div>
+		
+		<div id="div2">
+			<input type="button" value="按钮一" style="background: yellow;" />
+			<input type="button" value="按钮二" />
+			<input type="button" value="按钮三" />
+			<p style="display: block;">内容一</p>
+			<p>内容二</p>
+			<p>内容三</p>
+		</div>
+		
+		
+	</body>
+</html>

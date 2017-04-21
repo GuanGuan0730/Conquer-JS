@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			p{
+				display: none;
+			}
+		</style>
+		<script>
+			window.onload=function(){
+				
+				
+				function tab(obj,isAuto){
+					var n=0;
+					var btns=obj.querySelectorAll('input');
+					var ps=obj.querySelectorAll("p");
+					
+					for(var i=0;i<btns.length;i++){
+						btns[i].index=i;
+						btns[i].onclick=function(){
+							n=this.index;
+							play();
+						};
+					}
+					
+					isAuto&&autoPlay();
+					
+					function autoPlay(){
+						setInterval(function(){
+							n++;
+							
+							if(n==btns.length){
+								n=0;
+							}
+							
+							play();
+						},1000);
+					}
+					
+					
+					function play(){
+						for(var i=0;i<btns.length;i++){
+							btns[i].style.background='';
+							ps[i].style.display='none';
+						}
+						
+						btns[n].style.background='yellow';
+						ps[n].style.display='block';
+					}
+				}
+				
+				var div1=document.getElementById("div1");
+				tab(div1);
+				
+				var div2=document.getElementById("div2");
+				tab(div2,true);
+			};
+		</script>
+	</head>
+	<body>
+		<div id="div1">
+			<input type="button" value="按钮一" style="background: yellow;" />
+			<input type="button" value="按钮二" />
+			<input type="button" value="按钮三" />
+			<p style="display: block;">内容一</p>
+			<p>内容二</p>
+			<p>内容三</p>
+		</div>
+		
+		<div id="div2">
+			<input type="button" value="按钮一" style="background: yellow;" />
+			<input type="button" value="按钮二" />
+			<input type="button" value="按钮三" />
+			<p style="display: block;">内容一</p>
+			<p>内容二</p>
+			<p>内容三</p>
+		</div>
+	</body>
+</html>
